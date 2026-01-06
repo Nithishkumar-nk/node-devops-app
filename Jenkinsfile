@@ -4,17 +4,18 @@ pipeline {
     stages {
         stage('Build Image') {
             steps {
-                sh 'docker build -t node-app:${BUILD_NUMBER} .'
+                sh '/usr/bin/docker build -t node-app:${BUILD_NUMBER} .'
             }
         }
         stage('Run Container') {
             steps {
                 sh '''
-                docker rm -f node-app || true
-                docker run -d -p 3000:3000 --name node-app node-app:${BUILD_NUMBER}
+                /usr/bin/docker rm -f node-app || true
+                /usr/bin/docker run -d -p 3000:3000 --name node-app node-app:${BUILD_NUMBER}
                 '''
             }
         }
     }
 }
+
 
